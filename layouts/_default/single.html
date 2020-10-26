@@ -16,7 +16,7 @@
                 {{ with .Params.tags }}
                     {{ $primaryTag := (index . 0) }}
                     <section class="post-full-tags">
-                        <a href="{{ "/tags/" | relLangURL }}{{ $primaryTag | urlize }}">{{ $primaryTag }}</a>
+                        <a href="{{ "/" | relLangURL }}{{ $primaryTag | urlize }}/">{{ $primaryTag }}</a>
                     </section>
                 {{ end }}
 
@@ -35,11 +35,11 @@
 
                         <section class="post-full-byline-meta">
                             {{ if .Param "author" }}
-                                <h4 class="author-name">{{ .Param "author" }}</h4>
+                                <strong class="author-name">{{ .Param "author" }}</strong>
                             {{ end }}
                             <div class="byline-meta-content">
-                                <time class="byline-meta-date" datetime="{{.Date.Format "2006-31-01"}}">{{.Date.Format "2 January 2006"}}</time>
-                                <span class="byline-reading-time"><span class="bull">&bull;</span> {{ .ReadingTime }} min read</span>
+                                <time class="byline-meta-date" datetime="{{.Date.Format "2006-01-02"}}">{{.Date.Format "2.1.2006"}}</time>
+                                <span class="byline-reading-time"><span class="bull">&bull;</span> {{ .ReadingTime }} min</span>
                             </div>
                         </section>
 

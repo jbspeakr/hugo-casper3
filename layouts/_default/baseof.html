@@ -5,36 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     {{ $title := print .Title " · " .Site.Title }}
-    {{ if .IsHome }}{{ $title = .Site.Title }}{{ end }}
+    {{ if .IsHome }}{{ $title = print .Site.Title ".eu · Wanderungen & Reiseberichte" }}{{ end }}
     <title>{{ $title }}</title>
+    <meta name="description" content="{{.Description | default .Site.Params.Description | plainify | truncate 160 }}" />
 
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     {{ $styles := resources.Get "scss/main.scss" | resources.ExecuteAsTemplate "style.main.scss" . | toCSS | minify | fingerprint }}
     <link rel="stylesheet" href="{{ $styles.Permalink }}" />
-
 </head>
 <body class="{{ block "body_class" . }} {{ end }}">
 
     <div class="site-wrapper">
         {{- block "main" . }}{{- end }}
 
-
         <footer class="site-footer outer">
             <div class="site-footer-content inner">
-                <section class="copyright"><a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a> &copy; {{ .Date.Format "2006" }}</section>
+                <section class="copyright"><a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a> &#8226; {{ .Site.Params.summary }}</section>
                 <nav class="site-footer-nav">
-                    <a href="{{ .Site.BaseURL }}">Latest Posts</a>
-                    {{ if .Site.Params.facebook }}<a href="{{ .Site.Params.facebook }}" target="_blank" rel="noopener">Facebook</a>{{ end }}
-                    {{ if .Site.Params.twitter }}<a href="{{ .Site.Params.twitter }}" target="_blank" rel="noopener">Twitter</a>{{ end }}
-                    {{ if .Site.Params.github }}<a href="{{ .Site.Params.github }}" target="_blank" rel="noopener">Github</a>{{ end }}
-                    <a href="https://jonathanjanssens.com" target="_blank" rel="noopener" style="opacity: 0.5;">Hugo Casper3 by Jonathan Janssens</a>
+                    {{ if .Site.Params.instagram }}<a href="{{ .Site.Params.instagram }}" target="_blank" rel="noopener">Instagram</a>{{ end }}
+                    <a href="{{ .Site.BaseURL }}impressum/" target="_blank" rel="noopener" style="opacity: 0.5;">Impressum</a>
+                    <a href="{{ .Site.BaseURL }}" target="_blank" rel="noopener" style="opacity: 0.5;">Wandern lieben mit Jan Brennenstuhl</a>
                 </nav>
             </div>
         </footer>
-
     </div>
-
 </body>
 </html>

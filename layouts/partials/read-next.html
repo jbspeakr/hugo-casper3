@@ -1,16 +1,46 @@
 {{ with .Params.tags }}
+        {{ $primaryTag := (index . 0) }}
+    <article class="read-next-card">
+        
+        <header class="read-next-card-header">
+            <strong><span>Mehr zu</span> <a href="{{ "/" | relLangURL }}{{ $primaryTag | urlize }}/">{{ $primaryTag }}</a></strong>
+        </header>
+        {{ end }}
+        {{ $related := .Site.RegularPages.Related . | first 3 }}
+        {{ with $related }}             
+        <div class="read-next-card-content">
+            <ul>
+                {{ range . }}
+                <li>
+                    <h4><a href="{{ .RelPermalink }}">{{ .Title }}</a></h4>
+                    <div class="read-next-card-meta">
+                            <p><time datetime="{{.Date.Format "2006-01-02"}}">{{.Date.Format "2.1.2006"}}</time> 
+                                {{ if .ReadingTime }} – {{ .ReadingTime }} MIN {{ end }}
+                            </p>
+                    </div>
+                </li>
+                {{ end }}
+            </ul>
+        </div>
+        {{ end }}
+    </article>
+
+
+
+<!-- {{ with .Params.tags }}
     {{ $primaryTag := (index . 0) }}
     <article class="read-next-card">
         <header class="read-next-card-header">
-            <h3><span>More in</span> <a href="{{ "/tags/" | relLangURL }}{{ $primaryTag | urlize }}">{{ $primaryTag }}</a></h3>
+            <strong><span>Mehr zu</span> <a href="{{ "/" | relLangURL }}{{ $primaryTag | urlize }}/">{{ $primaryTag }}</a></strong>
         </header>
         <div class="read-next-card-content">
             <ul>
+                {{index $.Site.Taxonomies.tags "$primaryTag"}}
                 {{ range first 3 (where (index $.Site.Taxonomies.tags $primaryTag).Pages "Section" "post") }}
                 <li>
                     <h4><a href="{{ .Permalink }}">{{ .Title }}</a></h4>
                     <div class="read-next-card-meta">
-                            <p><time datetime="{{.Date.Format "2006-31-01"}}">{{.Date.Format "01 Jan 2006"}}</time> 
+                            <p><time datetime="{{.Date.Format "2006-01-02"}}">{{.Date.Format "2.1.2006"}}</time> 
                                 {{ if .Params.reading_time }} – {{ .Params.reading_time }} {{ end }}
                             </p>
                     </div>
@@ -19,4 +49,4 @@
             </ul>
         </div>
     </article>
-{{ end }}
+{{ end }} -->

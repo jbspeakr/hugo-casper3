@@ -9,8 +9,8 @@
         <div class="inner site-header-content">
             <h1 class="site-title">{{ .Title }}</h1>
             <h2 class="site-description">
-                {{ if .Param "description" }}
-                    {{ .Param "description" }}
+                {{ if .Param "summary" }}
+                    {{ .Param "summary" }}
                 {{ else }}
                     A collection of {{ len .Pages }} post{{ if gt (len .Pages) 1 }}s{{ end }}
                 {{ end }}
