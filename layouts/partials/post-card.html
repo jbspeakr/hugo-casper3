@@ -1,15 +1,14 @@
-<article class="post-card post
-{{ if not (.context.Param "feature_image") }} no-image
-{{ else }}
-{{ if (eq (mod .index 6) 0) }} post-card-large {{ end }}
-{{ end }} ">
+<article class="post-card post {{ if (eq (mod .index 6) 0) }} post-card-large {{ end }}">
 
-        {{ if .context.Param "feature_image" }}
-            <a class="post-card-image-link" href="{{ .context.Permalink }}">
-                <img class="post-card-image"src="{{ .context.Param "feature_image" }}" alt="{{ .context.Title }}"/>
-            </a>
+        {{ if .context.Resources }}
+        <a class="post-card-image-link" href="{{ .context.Permalink }}" title="{{.context.Title}}">
+            {{ range $image := .context.Resources }}
+
+                {{ partial "responsive-image" (dict "image" $image "attrs" (dict "alt" .Title "class" "post-card-image" )) }}
+            {{ end }}
+        </a>
         {{ end }}
-    
+
         <div class="post-card-content">
     
             <a class="post-card-content-link" href="{{ .context.Permalink }}">
