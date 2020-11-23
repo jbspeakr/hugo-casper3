@@ -16,7 +16,7 @@
                 <header class="post-card-header">
                     {{ with .context.Params.tags }}
                         {{ $primaryTag := (index . 0) }}
-                        <div class="post-card-primary-tag">{{ $primaryTag }}</div>
+                        <div class="post-card-primary-tag">{{ $primaryTag}}</div>
                     {{ end }}
 
                     <h2 class="post-card-title">{{ .context.Title }}</h2>
